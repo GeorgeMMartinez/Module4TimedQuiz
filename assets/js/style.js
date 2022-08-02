@@ -1,11 +1,8 @@
 var startButton = document.getElementById('startBtn')
-var introText = document.getElementById('intro')
 const questionsLoad = document.getElementById('questionsLoad')
 const optionsLoad = document.getElementById('optionsLoad')
 const optionButton = document.getElementById('optionButton')
-let scoreCount = document.getElementById('scoreCounter')
 const quiz = document.getElementById('quiz')
-let savedName = document.getElementById('saved-name')
 
 
 startButton.addEventListener("click", startQuiz)
