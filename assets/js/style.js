@@ -5,50 +5,36 @@ const optionsLoad = document.getElementById('optionsLoad')
 const optionButton = document.getElementById('optionButton')
 let scoreCount = document.getElementById('scoreCounter')
 const quiz = document.getElementById('quiz')
-const scoreButton = document.getElementById('saveScore')
-const saveSpace = document.getElementById('saveSpace')
-const saveLoad = document.getElementById('saveLoad')
-const leaderboardText = document.getElementById('lolLeader')
-const saveButton = document.getElementById('saveButton')
 let savedName = document.getElementById('saved-name')
-const saveAlert = document.getElementById('saveAlert')
+
 
 startButton.addEventListener("click", startQuiz)
 
 
 var timerEl = document.querySelector(".time");
-let timeLeft = 60;
-var timerInterval;
+var timeLeft = 60;
 
-function setTime() {
-  var timerInterval = setInterval(function () {
-    if (timeLeft >= 0) {
-      timerEl.textContent = "Time: " + timeLeft;
-      timeLeft--;
-    };
+const timeCounter = () => {
+  timeLeft -= 1
+  timeLeft.textContent = `Time Left: ${timeLeft}s`
+  if (timeLeft === 0) {
 
-    if (timeLeft <= 0) {
-      timerEl.textContent = "Time: 0";
-      clearInterval(timerInterval);
-      quizQuestion.textContent = "Time is up!"
-    }
-  }, interval);
+    timeLeft.classList.remove('timeLeft')
+    
+    quizBox.classList.remove('quiz')
+    
+  }
 }
+
 
 document.addEventListener("click", event => {
   if(event.target.classList.contains('options')) {
     if (event.target.dataset.options == event.target.dataset.answer) {
       score += 1
       currentQuestion += 1
-      if(currentQuestion == questions.length) {
-        quiz.classList.add('quizEnd')
-        quiz.classList.remove('quiz')
-        // finalScore()
-      }
-      // scoreLoad()
       loadQuiz()
     } else {
-      time -= 10
+      timeLeft -= 10
     }
   }
 })
@@ -86,7 +72,6 @@ let questions = [
 
 function loadQuiz() {
 
-
   questionsLoad.innerHTML = `
   <p class="question">${questions[currentQuestion].question}`
 
@@ -114,17 +99,3 @@ function startQuiz() {
   `
 }
 
-const timeCounter = () => {
-  timeLeft -= 1
-  timeLeft.textContent = `Time Left: ${timeLeft}s`
-  if (timeLeft === 0) {
-
-    timeLeft.classList.remove('timeLeft')
-    quizBox.classList.add('quizEnd')
-    quizBox.classList.remove('quiz')
-    lose.innerHTML = `<p class="lose">YOU LOSE!</p>
-        <button onClick="window.location.reload();" class="tryAgain">Try Again?</button>`
-    timeHaha.innerHTML = `<h4 class="timeOut" id="timeLeft">Time Left: 0</h4>`
-
-  }
-}
