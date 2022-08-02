@@ -16,7 +16,7 @@ var timeLeft = 60;
 
 const timeCounter = () => {
   timeLeft -= 1
-  timeLeft.textContent = `Time Left: ${timeLeft}s`
+  timerEl.textContent = `Time Left: ${timeLeft}s`
   if (timeLeft === 0) {
 
     timeLeft.classList.remove('timeLeft')
